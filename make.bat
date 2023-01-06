@@ -1,5 +1,5 @@
 @echo off
-set targetpath=C:\Users\emberling\Documents\GitHub\emberling.github.io
+set targetpath=..\emberling.github.io
 rem generate.py
 copy index.html %targetpath% /Y
 copy johnnydmad.css %targetpath% /Y
