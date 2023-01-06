@@ -1,0 +1,11 @@
+*.pyc
+*.smc
+*.spc
+*.html
+core
+legacy
+sleep
+static
+tierboss
+upcoming
+victory
