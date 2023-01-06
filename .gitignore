@@ -2,6 +2,7 @@
 *.smc
 *.spc
 *.html
+*.tmp
 core
 legacy
 sleep
