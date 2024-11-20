@@ -87,10 +87,12 @@ class Track():
         album = re.search("(?<=#ALBUM )([^;\n]*)", mml, re.IGNORECASE)
         composer = re.search("(?<=#COMPOSER )([^;\n]*)", mml, re.IGNORECASE)
         arranged = re.search("(?<=#ARRANGED )([^;\n]*)", mml, re.IGNORECASE)
+        transcribe = re.search("(?<=#TRANS )([^;\n]*)", mml, re.IGNORECASE)
         self.title = title.group(0) if title else self.varid('_')
         self.album = album.group(0) if title else ""
         self.composer = composer.group(0) if composer else ""
         self.arranged = arranged.group(0) if arranged else ""
+        self.transcribe = transcribe.group(0) if transcribe else ""
         spc = text_insert(spc, 0x2E, self.title, 0x20)
         spc = text_insert(spc, 0x4E, self.album, 0x20)
         spc = text_insert(spc, 0xB1, self.composer, 0x20)
@@ -265,7 +267,7 @@ for page in pages:
     pagehead = head.replace("<!-- NAV -->", nav)
     # - main
     table = "<table>\n"
-    table_columns = ["", "file", "Origin game", "Title", "Runtime", "Original composer", "Arranged/ported by", "Download"]
+    table_columns = ["", "file", "Origin game", "Title", "Runtime", "Original composer", "Transcription/<br>reference", "Arranged/ported by", "Download"]
     table += table_row(table_columns, head=True)
     
     for track in tracks:
@@ -273,7 +275,7 @@ for page in pages:
         dl = f"<a href='{os.path.basename(track.spcfile)}' id='{track.varid(':')}'>SPC</a>"
         if track.mmlremote:
             dl += f" <a href='{track.mmlremote}'>Source</a>"
-        table += table_row([play, track.varid(':'), track.album, track.title, track.duration_text, track.composer, track.arranged, dl])
+        table += table_row([play, track.varid(':'), track.album, track.title, track.duration_text, track.composer, track.transcribe, track.arranged, dl])
     table += "</table>\n"
 
     html = f"<head><title>{cfg['title']}</title></head>"
